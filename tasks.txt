@@ -1,0 +1,10 @@
+Creati un proiect golang
+1.Implementati o functie care returneaza sirul lui fibonacci. Functia primeste ca parametru nr de elemente pe care le returnam. 
+ex: func (5) -> return primele 5 elemente din sir.
+2.Implementati o functie de sortare a elementelor dintr-un array. Functia primeste ca parametru un array of int si returneaza array-ul sortat.
+3.Implementati o functie care returneaza duplicatele dintr-un array. Functia primeste ca parametru un array si returneaza elementele duplicate.
+ex: func( [5,4,5,5,3,1,3] -> return Elementul 5 exista de 3 ori, Elementul 3 exista de 2 ori
+4. Implementati o functie care elimina duplicatele dintr-un array. Functia primeste ca parametru un array si returneaza array-ul fara duplicate.
+5. Pentru un string s, returnati cel mai lung substring palindrom al lui s.
+ex: func("asd/ana/minim") -> return minim
+6. Pentru un array ce contine n numere naturale distincte din intervalul [0, n], returnati singurul numar din interval ce lipseste din array-ul dat.
