@@ -49,6 +49,16 @@ func MaxElement(arr []int) int {
 	return maxim
 }
 
+func MinElement(arr []int) int {
+	minim := arr[0]
+	for i := 1; i < len(arr); i++ {
+		if arr[i] < minim {
+			minim = arr[i]
+		}
+	}
+	return minim
+}
+
 func FrequencyArray(arr []int, helper []int) {
 	for i := 0; i < len(arr); i++ {
 		helper[arr[i]]++
@@ -74,15 +84,16 @@ func FindDublicateElements(arr []int) {
 func DeletionWithNewArray(arr []int, helper []int) {
 	nr := 0
 	for j := 0; j < len(helper); j++ {
-		if helper[j] == 1 {
+		if helper[j] > 0 {
 			nr++
 		}
 	}
 	newArray := make([]int, nr)
 	k := 0
 	for i := 0; i < len(arr); i++ {
-		if helper[arr[i]] == 1 {
+		if helper[arr[i]] > 0 {
 			newArray[k] = arr[i]
+			helper[arr[i]] = 0
 			k++
 		}
 	}
@@ -94,6 +105,7 @@ func DeletionFromArray(arr []int, helper []int) {
 	n := len(arr)
 	for i := len(arr) - 1; i >= 0; i-- {
 		if helper[arr[i]] >= 2 {
+			helper[arr[i]]--
 			for j := i; j < len(arr)-1; j++ {
 				arr[j] = arr[j+1]
 			}
@@ -102,7 +114,7 @@ func DeletionFromArray(arr []int, helper []int) {
 	}
 
 	var newArray []int
-	newArray = append(newArray, arr[:4]...)
+	newArray = append(newArray, arr[:n]...)
 
 	fmt.Println("The new array after the deletions: ", newArray)
 }
@@ -184,13 +196,14 @@ func FindLongestPalindromicSubstring(str string) {
 
 func FindElementMissing(arr []int) {
 	maximArray := MaxElement(arr)
-	fmt.Printf("\nThe array has elements in range [ 0 , %v ].", maximArray)
+	minimArray := MinElement(arr)
+	fmt.Printf("\nThe array has elements in range [ %v , %v ].", minimArray, maximArray)
 
 	helper := make([]int, maximArray+1)
 	FrequencyArray(arr, helper)
 
 	fmt.Print("\nThe element that are missing is: ")
-	for i := 0; i < len(helper); i++ {
+	for i := minimArray; i < len(helper); i++ {
 		if helper[i] == 0 {
 			fmt.Printf("%v ", i)
 			break //because is just one element that are missing.
@@ -250,6 +263,10 @@ func main() {
 		fmt.Scan(&method)
 		fmt.Println()
 		DeleteDublicateElements(array, method)
+		fmt.Println()
+		array1 := []int{2, 2, 2, 5, 5, 10, 10}
+		fmt.Println("Another array is: ", array1)
+		DeleteDublicateElements(array1, method)
 
 	case 5:
 		fmt.Println("----------- Exercise 5 -----------")
@@ -265,7 +282,7 @@ func main() {
 	case 6:
 		fmt.Println("----------- Exercise 6 -----------")
 		fmt.Println()
-		array := []int{0, 5, 2, 3, 9, 1, 4, 6, 8}
+		array := []int{3, 4, 5, 6, 8, 9, 10}
 		fmt.Println("The array is: ", array, "In this array, just one element is missing.")
 		FindElementMissing(array)
 
